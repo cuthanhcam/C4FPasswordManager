@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AUTO_CLEAR_CLIPBOARD_IN_0" xml:space="preserve">
+    <value>Xóa bộ nhớ tạm trong {0} giây.</value>
+  </data>
+  <data name="AUTO_CLEAR_CLIPBOARD_IN_ONE" xml:space="preserve">
+    <value>Xóa bộ nhớ tạm trong 1 giây.</value>
+  </data>
+  <data name="AUTO_HIDE_IN_0" xml:space="preserve">
+    <value>Ẩn mật khẩu trong {0} giây.</value>
+  </data>
+  <data name="AUTO_HIDE_IN_ONE" xml:space="preserve">
+    <value>Ẩn mật khẩu trong 1 giây.</value>
+  </data>
+  <data name="BUTTON_CANCEL" xml:space="preserve">
+    <value>_Hủy</value>
+  </data>
+  <data name="BUTTON_COPY_PASSWORD" xml:space="preserve">
+    <value>_Sao chép</value>
+  </data>
+  <data name="BUTTON_EXIT" xml:space="preserve">
+    <value>_Thoát</value>
+  </data>
+  <data name="BUTTON_LOGIN" xml:space="preserve">
+    <value>Đăng _nhập</value>
+  </data>
+  <data name="BUTTON_NEW_PASSWORD" xml:space="preserve">
+    <value>Mật khẩu _mới</value>
+  </data>
+  <data name="BUTTON_OK" xml:space="preserve">
+    <value>_OK</value>
+  </data>
+  <data name="BUTTON_UPLOAD" xml:space="preserve">
+    <value>Tải _lên</value>
+  </data>
+  <data name="CLOUD_LOGIN_SUCCEEDED" xml:space="preserve">
+    <value>Đăng nhập thành công vào đám mây.</value>
+  </data>
+  <data name="CLOUD_UPLOAD_SUCCEEDED" xml:space="preserve">
+    <value>Tất cả mật khẩu đã được tải lên thành công.</value>
+  </data>
+  <data name="CMD_ABOUT" xml:space="preserve">
+    <value>_Giới thiệu...</value>
+  </data>
+  <data name="CMD_ADD" xml:space="preserve">
+    <value>_Thêm...</value>
+  </data>
+  <data name="CMD_CHANGE_KEY_DIRECTORY" xml:space="preserve">
+    <value>Thay đổi thư mục _khóa...</value>
+  </data>
+  <data name="CMD_CHANGE_MASTER_PASSWORD" xml:space="preserve">
+    <value>Thay đổi mật khẩu _chính...</value>
+  </data>
+  <data name="CMD_CLOSE" xml:space="preserve">
+    <value>_Đóng</value>
+  </data>
+  <data name="CMD_CLOUD_LOGIN" xml:space="preserve">
+    <value>_Đăng nhập vào đám mây...</value>
+  </data>
+  <data name="CMD_CLOUD_UPLOAD" xml:space="preserve">
+    <value>_Tải mật khẩu lên đám mây...</value>
+  </data>
+  <data name="CMD_COPY_LOGIN" xml:space="preserve">
+    <value>Sao chép _tài khoản vào bộ nhớ tạm</value>
+  </data>
+  <data name="CMD_COPY_PASSWORD" xml:space="preserve">
+    <value>Sao chép _mật khẩu vào bộ nhớ tạm</value>
+  </data>
+  <data name="CMD_DELETE" xml:space="preserve">
+    <value>_Xóa</value>
+  </data>
+  <data name="CMD_EDIT" xml:space="preserve">
+    <value>_Sửa...</value>
+  </data>
+  <data name="CMD_EXIT" xml:space="preserve">
+    <value>_Thoát</value>
+  </data>
+  <data name="CMD_GENERATE_PASSWORD" xml:space="preserve">
+    <value>Khởi động trình _tạo mật khẩu</value>
+  </data>
+  <data name="CMD_HIDE_PASSWORD" xml:space="preserve">
+    <value>_Ẩn mật khẩu</value>
+  </data>
+  <data name="CMD_NEW" xml:space="preserve">
+    <value>_Mới...</value>
+  </data>
+  <data name="CMD_OPEN" xml:space="preserve">
+    <value>_Mở...</value>
+  </data>
+  <data name="CMD_OPEN_URL" xml:space="preserve">
+    <value>Mở _URL trong trình duyệt</value>
+  </data>
+  <data name="CMD_PROPERTIES" xml:space="preserve">
+    <value>_Thuộc tính...</value>
+  </data>
+  <data name="CMD_SAVE" xml:space="preserve">
+    <value>_Lưu</value>
+  </data>
+  <data name="CMD_SAVE_AS" xml:space="preserve">
+    <value>Lưu _dưới dạng...</value>
+  </data>
+  <data name="CMD_SETTINGS" xml:space="preserve">
+    <value>_Cài đặt...</value>
+  </data>
+  <data name="CMD_SHOW_LOGIN_COLUMN" xml:space="preserve">
+    <value>Hiển thị cột _tài khoản</value>
+  </data>
+  <data name="CMD_SHOW_PASSWORD" xml:space="preserve">
+    <value>_Hiển thị mật khẩu</value>
+  </data>
+  <data name="CMD_SHOW_PASSWORD_COLUMN" xml:space="preserve">
+    <value>Hiển thị cột mật _khẩu</value>
+  </data>
+  <data name="CMD_SHOW_TOOLBAR" xml:space="preserve">
+    <value>Hiển thị _thanh công cụ</value>
+  </data>
+  <data name="COLUMN_LOGIN" xml:space="preserve">
+    <value>Tài khoản</value>
+  </data>
+  <data name="COLUMN_NAME" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="COLUMN_PASSWORD" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="ERROR_CLOUD_LOGIN_FAILED" xml:space="preserve">
+    <value>Tên đăng nhập/mật khẩu không hợp lệ hoặc tài khoản bị vô hiệu hóa.</value>
+  </data>
+  <data name="ERROR_CLOUD_UPLOAD_FAILED" xml:space="preserve">
+    <value>Không thể tải mật khẩu lên.</value>
+  </data>
+  <data name="ERROR_INVALID_FORMAT" xml:space="preserve">
+    <value>Tệp đã chọn có định dạng sai.</value>
+  </data>
+  <data name="ERROR_KEY_NOT_FOUND_0_1" xml:space="preserve">
+    <value>Khóa cho '{0}' không tồn tại trong thư mục '{1}'.</value>
+  </data>
+  <data name="ERROR_OCCURRED_0" xml:space="preserve">
+    <value>Đã xảy ra lỗi. {0}</value>
+  </data>
+  <data name="ERROR_PASSWORD_DOES_NOT_MATCH" xml:space="preserve">
+    <value>Mật khẩu không khớp.</value>
+  </data>
+  <data name="ERROR_PASSWORD_MIN_CHARS" xml:space="preserve">
+    <value>Mật khẩu phải có ít nhất 4 ký tự.</value>
+  </data>
+  <data name="ERROR_PWDGEN_INVALID_INPUT" xml:space="preserve">
+    <value>Tệp đã chọn có định dạng sai.</value>
+  </data>
+  <data name="ERROR_WRONG_PASSWORD" xml:space="preserve">
+    <value>Mật khẩu sai.</value>
+  </data>
+  <data name="FILE_DIALOG_FILTER" xml:space="preserve">
+    <value>Tệp mật khẩu (*.pwd)|*.pwd|Tất cả tệp (*.*)|*.*</value>
+  </data>
+  <data name="LABEL_AUTOLOCK" xml:space="preserve">
+    <value>Tự động _khóa cửa sổ</value>
+  </data>
+  <data name="LABEL_AUTOMINIMIZE" xml:space="preserve">
+    <value>và _thu nhỏ cửa sổ</value>
+  </data>
+  <data name="LABEL_AUTO_CLEAR_CLIPBOARD" xml:space="preserve">
+    <value>X_óa bộ nhớ tạm sau (giây):</value>
+  </data>
+  <data name="LABEL_AUTO_HIDE_PASSWORD" xml:space="preserve">
+    <value>_Ẩn mật khẩu sau (giây):</value>
+  </data>
+  <data name="LABEL_CLOUD_KEY_DESC" xml:space="preserve">
+    <value>Nhập khóa để mã hóa mật khẩu trong đám mây.</value>
+  </data>
+  <data name="LABEL_CLOUD_PASS2" xml:space="preserve">
+    <value>Nhập mã bảo mật cho xác thực hai yếu tố.</value>
+  </data>
+  <data name="LABEL_CLOUD_URL" xml:space="preserve">
+    <value>URL _đám mây:</value>
+  </data>
+  <data name="LABEL_CODE" xml:space="preserve">
+    <value>Mã _bảo mật:</value>
+  </data>
+  <data name="LABEL_CONFIRM_MASTER_PASSWORD" xml:space="preserve">
+    <value>Xác nhận mật khẩu chính _mới:</value>
+  </data>
+  <data name="LABEL_CONFIRM_NEW_MASTER_PASSWORD" xml:space="preserve">
+    <value>Xác nhận mật khẩu chính _mới:</value>
+  </data>
+  <data name="LABEL_CONFIRM_PASSWORD" xml:space="preserve">
+    <value>Xác nhận mật _khẩu:</value>
+  </data>
+  <data name="LABEL_DESCRIPTION" xml:space="preserve">
+    <value>_Mô tả:</value>
+  </data>
+  <data name="LABEL_DIGITS" xml:space="preserve">
+    <value>Số _chữ số</value>
+  </data>
+  <data name="LABEL_ENTER_MASTER_PASSWORD_FOR_0" xml:space="preserve">
+    <value>Nhập mật khẩu chính cho '{0}'.</value>
+  </data>
+  <data name="LABEL_GENERATED_PASSWORD" xml:space="preserve">
+    <value>Mật khẩu:</value>
+  </data>
+  <data name="LABEL_KEY" xml:space="preserve">
+    <value>Khoá:</value>
+  </data>
+  <data name="LABEL_KEY_DIRECTORY" xml:space="preserve">
+    <value>Thư mục _khóa:</value>
+  </data>
+  <data name="LABEL_LANGUAGE" xml:space="preserve">
+    <value>Ngôn ngữ:</value>
+  </data>
+  <data name="LABEL_LOGIN" xml:space="preserve">
+    <value>Đăng nhập:</value>
+  </data>
+  <data name="LABEL_LOWER_CHARS" xml:space="preserve">
+    <value>Ký tự thường:</value>
+  </data>
+  <data name="LABEL_MASTER_PASSWORD" xml:space="preserve">
+    <value>Mật khẩu _chính:</value>
+  </data>
+  <data name="LABEL_NAME" xml:space="preserve">
+    <value>_Tên:</value>
+  </data>
+  <data name="LABEL_NEW_MASTER_PASSWORD" xml:space="preserve">
+    <value>Mật khẩu chính _mới:</value>
+  </data>
+  <data name="LABEL_OLD_MASTER_PASSWORD" xml:space="preserve">
+    <value>Mật khẩu chính hiện tại:</value>
+  </data>
+  <data name="LABEL_PASSWORD" xml:space="preserve">
+    <value>Mật khẩu:</value>
+  </data>
+  <data name="LABEL_PASSWORD_FILE" xml:space="preserve">
+    <value>Tệp mật khẩu:</value>
+  </data>
+  <data name="LABEL_PASSWORD_LENGTH" xml:space="preserve">
+    <value>Độ dài mật khẩu:</value>
+  </data>
+  <data name="LABEL_REENTER_PASSWORD" xml:space="preserve">
+    <value>Nhập lại mật khẩu sau (giây):</value>
+  </data>
+  <data name="LABEL_SELECT_KEY_DIRECTORY" xml:space="preserve">
+    <value>Chọn thư mục khóa.</value>
+  </data>
+  <data name="LABEL_SYMBOLS" xml:space="preserve">
+    <value>Ký tự đặc biệt:</value>
+  </data>
+  <data name="LABEL_TOPMOST" xml:space="preserve">
+    <value>Luôn hiển thị cửa sổ lên trên cùng</value>
+  </data>
+  <data name="LABEL_UPPER_CHARS" xml:space="preserve">
+    <value>Ký tự in hoa:</value>
+  </data>
+  <data name="LABEL_URL" xml:space="preserve">
+    <value>URL:</value>
+  </data>
+  <data name="MENUITEM_EDIT" xml:space="preserve">
+    <value>Chỉnh sửa</value>
+  </data>
+  <data name="MENUITEM_FILE" xml:space="preserve">
+    <value>Tệp</value>
+  </data>
+  <data name="MENUITEM_HELP" xml:space="preserve">
+    <value>Trợ giúp</value>
+  </data>
+  <data name="MENUITEM_VIEW" xml:space="preserve">
+    <value>Xem</value>
+  </data>
+  <data name="OPTION_ENGLISH" xml:space="preserve">
+    <value>Tiếng Anh</value>
+  </data>
+  <data name="OPTION_VIETNAMESE" xml:space="preserve">
+    <value>Tiếng Việt</value>
+  </data>
+  <data name="OPTION_SYSTEM" xml:space="preserve">
+    <value>Ngôn ngữ hệ thống</value>
+  </data>
+  <data name="QUESTION_DELETE_ITEMS" xml:space="preserve">
+    <value>Bạn có muốn xóa các mục đã chọn?</value>
+  </data>
+  <data name="QUESTION_SAVE_CHANGES" xml:space="preserve">
+    <value>Bạn có muốn lưu các thay đổi không?</value>
+  </data>
+  <data name="SELECTED_0_OF_1" xml:space="preserve">
+    <value>{0} trên {1} mục đã chọn.</value>
+  </data>
+  <data name="SELECTED_ONE" xml:space="preserve">
+    <value>1 mục đã chọn.</value>
+  </data>
+  <data name="TEXT_COPYRIGHT" xml:space="preserve">
+    <value>Trình quản lý mật khẩu C4F
+Bản quyền (C) 2024 Code for food (C4F)
+Đóng góp của Cam Cu Thanh
+&lt;https://github.com/cuthanhcam&gt;
+
+Chương trình này là phần mềm miễn phí: bạn có thể phân phối lại hoặc sửa đổi.
+
+Đây là Đồ Án môn Bảo Mật Thông Tin.</value>
+  </data>
+  <data name="TEXT_RESTART_REQUIRED" xml:space="preserve">
+    <value>Yêu cầu khởi động lại để áp dụng các thay đổi.</value>
+  </data>
+  <data name="TEXT_SEARCH_LIST" xml:space="preserve">
+    <value>Tìm kiếm danh sách</value>
+  </data>
+  <data name="TITLE_ADD" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
+  <data name="TITLE_CHANGE_MASTER_PASSWORD" xml:space="preserve">
+    <value>Đổi mật khẩu chính</value>
+  </data>
+  <data name="TITLE_CLOUD_LOGIN" xml:space="preserve">
+    <value>Đăng nhập vào đám mây</value>
+  </data>
+  <data name="TITLE_CLOUD_UPLOAD" xml:space="preserve">
+    <value>Tải mật khẩu lên đám mây</value>
+  </data>
+  <data name="TITLE_EDIT" xml:space="preserve">
+    <value>Chỉnh sửa</value>
+  </data>
+  <data name="TITLE_GENERATE_PASSWORD" xml:space="preserve">
+    <value>Trình tạo mật khẩu</value>
+  </data>
+  <data name="TITLE_NEW" xml:space="preserve">
+    <value>Tệp mật khẩu mới</value>
+  </data>
+  <data name="TITLE_PASSWORD_MANAGER" xml:space="preserve">
+    <value>Trình Quản Lý Mật Khẩu</value>
+  </data>
+  <data name="TITLE_PROPERTIES" xml:space="preserve">
+    <value>Thuộc tính</value>
+  </data>
+  <data name="TITLE_SETTINGS" xml:space="preserve">
+    <value>Cài đặt</value>
+  </data>
+  <data name="TOOLTIP_ADD" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
+  <data name="TOOLTIP_COPY_LOGIN" xml:space="preserve">
+    <value>Sao chép tài khoản vào bộ nhớ tạm</value>
+  </data>
+  <data name="TOOLTIP_COPY_PASSWORD" xml:space="preserve">
+    <value>Sao chép mật khẩu vào bộ nhớ tạm</value>
+  </data>
+  <data name="TOOLTIP_DELETE" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="TOOLTIP_EDIT" xml:space="preserve">
+    <value>Chỉnh sửa</value>
+  </data>
+  <data name="TOOLTIP_GENERATE_PASSWORD" xml:space="preserve">
+    <value>Bắt đầu trình tạo mật khẩu</value>
+  </data>
+  <data name="TOOLTIP_HIDE_PASSWORD" xml:space="preserve">
+    <value>Ẩn mật khẩu</value>
+  </data>
+  <data name="TOOLTIP_NEW" xml:space="preserve">
+    <value>Tạo mới</value>
+  </data>
+  <data name="TOOLTIP_OPEN" xml:space="preserve">
+    <value>Mở</value>
+  </data>
+  <data name="TOOLTIP_OPEN_URL" xml:space="preserve">
+    <value>Mở URL trong trình duyệt</value>
+  </data>
+  <data name="TOOLTIP_SAVE" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="TOOLTIP_SHOW_PASSWORD" xml:space="preserve">
+    <value>Hiển thị mật khẩu</value>
+  </data>
+  <data name="TOTAL_0" xml:space="preserve">
+    <value>{0} mục.</value>
+  </data>
+  <data name="TOTAL_ONE" xml:space="preserve">
+    <value>1 mục.</value>
+  </data>
+  <data name="VERIFY_PASSWORD" xml:space="preserve">
+    <value>Xác minh mật khẩu</value>
+  </data>
+</root>
