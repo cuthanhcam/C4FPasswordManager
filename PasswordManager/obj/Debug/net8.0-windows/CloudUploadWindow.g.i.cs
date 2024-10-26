@@ -78,7 +78,7 @@ namespace PasswordManager {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/C4FPasswordManager;V8.0.3;component/clouduploadwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/C4FPasswordManager;V1.0.1;component/clouduploadwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\CloudUploadWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

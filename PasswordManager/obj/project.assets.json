@@ -393,7 +393,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "8.0.3",
+    "version": "1.0.1",
     "restore": {
       "projectUniqueName": "D:\\SourceCode\\C4FPasswordManager\\PasswordManager\\PasswordManager.csproj",
       "projectName": "C4FPasswordManager",
