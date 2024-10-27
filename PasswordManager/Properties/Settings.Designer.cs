@@ -241,7 +241,7 @@ namespace PasswordManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/cuthanhcam")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c4fpasswordmanager.appspot.com")]
         public string CloudUrl {
             get {
                 return ((string)(this["CloudUrl"]));

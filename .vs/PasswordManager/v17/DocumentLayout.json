@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "D:\\SourceCode\\C4FPasswordManager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2AA3E8DA-DEB3-4B71-9F45-1D4E8DDE6A27}|PasswordManager\\PasswordManager.csproj|d:\\sourcecode\\c4fpasswordmanager\\passwordmanager\\clouduploadwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AA3E8DA-DEB3-4B71-9F45-1D4E8DDE6A27}|PasswordManager\\PasswordManager.csproj|solutionrelative:passwordmanager\\clouduploadwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2AA3E8DA-DEB3-4B71-9F45-1D4E8DDE6A27}|PasswordManager\\PasswordManager.csproj|d:\\sourcecode\\c4fpasswordmanager\\passwordmanager\\cloudloginwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AA3E8DA-DEB3-4B71-9F45-1D4E8DDE6A27}|PasswordManager\\PasswordManager.csproj|solutionrelative:passwordmanager\\cloudloginwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CloudUploadWindow.xaml.cs",
-              "DocumentMoniker": "D:\\SourceCode\\C4FPasswordManager\\PasswordManager\\CloudUploadWindow.xaml.cs",
-              "RelativeDocumentMoniker": "PasswordManager\\CloudUploadWindow.xaml.cs",
-              "ToolTip": "D:\\SourceCode\\C4FPasswordManager\\PasswordManager\\CloudUploadWindow.xaml.cs",
-              "RelativeToolTip": "PasswordManager\\CloudUploadWindow.xaml.cs",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAgwF4AAAAJAAAAAAAAAA==",
+              "Title": "CloudLoginWindow.xaml.cs",
+              "DocumentMoniker": "D:\\SourceCode\\C4FPasswordManager\\PasswordManager\\CloudLoginWindow.xaml.cs",
+              "RelativeDocumentMoniker": "PasswordManager\\CloudLoginWindow.xaml.cs",
+              "ToolTip": "D:\\SourceCode\\C4FPasswordManager\\PasswordManager\\CloudLoginWindow.xaml.cs",
+              "RelativeToolTip": "PasswordManager\\CloudLoginWindow.xaml.cs",
+              "ViewState": "AgIAAI4AAAAAAAAAAAAwwJUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T01:23:51.449Z",
+              "WhenOpened": "2024-10-27T04:56:33.066Z",
               "EditorCaption": ""
             }
           ]

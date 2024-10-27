@@ -33,10 +33,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace PasswordManager
-{    
+{
     public partial class MainWindow : Window
     {
-        #pragma warning disable CA1416
+#pragma warning disable CA1416
 
         private int autoClearClipboardAfterSec = 30; // clear clipboard after 30 seconds, 0 to disable
         private int autoHidePasswordAfterSec = 30; // hide all passwords after 30 seconds, 0 to disable
@@ -306,9 +306,6 @@ namespace PasswordManager
                 case "CloudLogin":
                     e.CanExecute = hasRepository && Settings.Default.CloudUrl.Length > 0;
                     break;
-                case "CloudUpload":
-                    e.CanExecute = cloudAuthenticationToken != null;
-                    break;
                 case "Edit":
                     e.CanExecute = selected == 1;
                     break;
@@ -364,9 +361,6 @@ namespace PasswordManager
                     break;
                 case "CloudLogin":
                     CloudLogin();
-                    break;
-                case "CloudUpload":
-                    CloudUpload();
                     break;
                 case "Properties":
                     ShowProperties();
@@ -434,8 +428,8 @@ namespace PasswordManager
             autoClearClipboardAfterSec = Settings.Default.AutoClearClipboard;
             autoHidePasswordAfterSec = Settings.Default.AutoHidePassword;
             reenterPasswordAfterSec = Settings.Default.ReenterPassword;
-            menuItemImageShow = new Image{ Source = imageShow16x16, Height=16, Width=16 };
-            menuItemImageHide = new Image{ Source = imageHide16x16, Height = 16, Width = 16 };
+            menuItemImageShow = new Image { Source = imageShow16x16, Height = 16, Width = 16 };
+            menuItemImageHide = new Image { Source = imageHide16x16, Height = 16, Width = 16 };
             menuItemImageShowDisabled = new Image { Source = imageShow16x16, Opacity = 0.5, Height = 16, Width = 16 };
             contextMenuItemImageShow = new Image { Source = imageShow16x16, Height = 16, Width = 16 };
             contextMenuItemImageHide = new Image { Source = imageHide16x16, Height = 16, Width = 16 };
@@ -509,9 +503,9 @@ namespace PasswordManager
         {
             listView.Items.SortDescriptions.Clear();
             listView.Items.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
-            listView.Items.Refresh();            
+            listView.Items.Refresh();
         }
-  
+
         private void PrepareDirectory(string path)
         {
             try
@@ -746,7 +740,7 @@ namespace PasswordManager
         {
             EditItemAsync(listView.SelectedItem as PasswordViewItem);
         }
-  
+
         private async void EditItemAsync(PasswordViewItem item)
         {
             try
@@ -1010,7 +1004,7 @@ namespace PasswordManager
                         this,
                         Properties.Resources.QUESTION_SAVE_CHANGES,
                         Title,
-                        MessageBoxButton.YesNoCancel, 
+                        MessageBoxButton.YesNoCancel,
                         MessageBoxImage.Question,
                         MessageBoxResult.Cancel);
                     if (r == MessageBoxResult.Cancel)
@@ -1253,7 +1247,7 @@ namespace PasswordManager
                             return;
                         }
                         passwordRepository.MoveKey(keyDir, dlg.SelectedPath);
-                        keyDirectoryCache.Set(passwordRepository.Id, dlg.SelectedPath);                        
+                        keyDirectoryCache.Set(passwordRepository.Id, dlg.SelectedPath);
                     }
                 }
             }
@@ -1288,7 +1282,7 @@ namespace PasswordManager
                             return;
                         }
                         var keyDirectory = keyDirectoryCache.Get(passwordRepository.Id);
-                        passwordRepository.ChangeMasterPassword(passwordFilename, keyDirectory, dlg.SecurePassword);                        
+                        passwordRepository.ChangeMasterPassword(passwordFilename, keyDirectory, dlg.SecurePassword);
                     }
                     passwordSecureString = dlg.SecurePassword;
                     UpdateControls();
@@ -1300,26 +1294,6 @@ namespace PasswordManager
             }
         }
 
-        private void CloudUpload()
-        {
-            try
-            {
-                if (passwordRepository == null || cloudAuthenticationToken == null)
-                {
-                    return;
-                }
-                if (!ReenterPassword())
-                {
-                    return;
-                }
-                var dlg = new CloudUploadWindow(this, Properties.Resources.TITLE_CLOUD_UPLOAD, cloudAuthenticationToken, passwordRepository.Passwords);
-                dlg.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                HandleError(ex);
-            }
-        }
 
         private void CloudLogin()
         {

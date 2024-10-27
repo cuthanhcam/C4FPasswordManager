@@ -123,6 +123,7 @@ namespace PasswordManager
 
         private bool Validate(PwdGen gen)
         {
+            // Giới hạn hạn password từ 4 đến 40
             if (gen.Length < 4 || gen.Length > 40 ||
                 gen.MinDigits + gen.MinSymbols + gen.MinLowerCharacters + gen.MinUpperCharacters > gen.Length ||
                 gen.MinDigits < 0 || gen.MinSymbols < 0 || gen.MinLowerCharacters < 0 || gen.MinUpperCharacters < 0 ||

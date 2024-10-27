@@ -16,6 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
+
 using System.Windows.Input;
 
 namespace PasswordManager
@@ -85,12 +86,6 @@ namespace PasswordManager
             new RoutedUICommand(
             Properties.Resources.CMD_CLOUD_LOGIN,
             "CloudLogin",
-            typeof(CustomCommands));
-
-        public static readonly RoutedUICommand CloudUpload =
-            new RoutedUICommand(
-            Properties.Resources.CMD_CLOUD_UPLOAD,
-            "CloudUpload",
             typeof(CustomCommands));
 
         public static readonly RoutedUICommand Add =

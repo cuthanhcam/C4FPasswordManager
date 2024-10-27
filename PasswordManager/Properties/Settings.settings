@@ -57,7 +57,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CloudUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://github.com/cuthanhcam</Value>
+      <Value Profile="(Default)">c4fpasswordmanager.appspot.com</Value>
     </Setting>
     <Setting Name="CloudUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
