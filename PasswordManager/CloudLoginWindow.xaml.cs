@@ -1,28 +1,4 @@
-﻿/*
-C4F Password Manager
-    Copyright (C) 2024 Code for food (C4F)
-    Contributions by Cam Cu Thanh
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
-
-// Tutorial:
-// Add Bucket name
-// In InitializeStorageClient method: Enter the JSON file path of the service account
-// In FirebaseAuthenticate method: Enter Firebase APIKey
-
-using Google.Apis.Auth.OAuth2;
+﻿using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Storage.V1;
 using System;
 using System.ComponentModel;
@@ -30,24 +6,29 @@ using System.IO;
 using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using System.Text.RegularExpressions;
+using System.Net.Mail;
 
 namespace PasswordManager
 {
     public partial class CloudLoginWindow : Window
     {
-        private bool waiting = false;
-        private ClientInfo ClientInfo { get; set; } = null;
-        public SecureString CloudToken { get; set; }
-        public bool IsLoggedIn { get; private set; } = false; // Biến để kiểm tra trạng thái đăng nhập
+        private bool _isOtpSent = false;
+        private bool _isOtpVerified = false;
+        private bool _isWaiting = false;
+        private StorageClient _storageClient;
+        private const string BucketName = "YOUR_BUCKET_NAME"; //E.g passwordmanager.appspot.com
+        private string _generatedOtp;
 
-        // Biến cho Google Cloud Storage
-        private StorageClient storageClient;
-        private const string bucketName = "YOUR_BUCKET_NAME"; // Thay bằng tên bucket của bạn E.g c4fpasswordmanager.appspot.com
+        public SecureString CloudToken { get; set; }
+        public bool IsLoggedIn { get; private set; } = false;
+        private ClientInfo ClientInfo { get; set; }
 
         public CloudLoginWindow(Window owner, string title, ClientInfo clientInfo)
         {
@@ -57,34 +38,20 @@ namespace PasswordManager
             WindowStartupLocation = WindowStartupLocation.CenterOwner;
             Topmost = Properties.Settings.Default.Topmost;
             InitializeComponent();
-            textBoxUsername.Text = Properties.Settings.Default.CloudUsername;
-            if (textBoxUsername.Text.Length == 0)
-            {
-                textBoxUsername.Focus();
-            }
-            else
-            {
-                passwordBoxUser.Focus();
-            }
-            UpdateControls();
-
-            // Khởi tạo Google Cloud Storage client
             InitializeStorageClient();
+            UpdateControls();
         }
 
-        // Hàm để khởi tạo StorageClient cho Google Cloud Storage
         private void InitializeStorageClient()
         {
             try
             {
-                // Đọc tệp JSON của tài khoản dịch vụ
-                var credential = GoogleCredential.FromFile("ENTER_THE_JSON_FILE_PATH_OF_THE_SERVICE_ACCOUNT"); // E.g D:\\C4FPasswordManager\\service_account.json
-                storageClient = StorageClient.Create(credential);
-                MessageBox.Show("Google Cloud Storage initialized successfully.");
+                var credential = GoogleCredential.FromFile("YOUR_SERVICE_ACCOUNT_PATH"); //E.g D:C4FPasswordManager\\service_account.json
+                _storageClient = StorageClient.Create(credential);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error initializing Google Cloud Storage: {ex.Message}");
+                ShowError($"Error initializing Google Cloud Storage: {ex.Message}");
             }
         }
 
@@ -93,119 +60,201 @@ namespace PasswordManager
             textBoxUsername.IsEnabled = true;
             passwordBoxUser.IsEnabled = true;
             buttonCancel.IsEnabled = true;
-            buttonLogin.IsEnabled =
-                textBoxUsername.Text.Length > 0 &&
-                passwordBoxUser.SecurePassword.Length > 0;
-            buttonUpload.IsEnabled = IsLoggedIn; // Kích hoạt nút upload nếu đã đăng nhập
-            buttonDownload.IsEnabled = IsLoggedIn; // Kích hoạt nút download nếu đã đăng nhập
+            buttonLogin.IsEnabled = _isOtpVerified && !string.IsNullOrEmpty(textBoxUsername.Text) && passwordBoxUser.SecurePassword.Length > 0;
+            buttonUpload.IsEnabled = IsLoggedIn;
+            buttonDownload.IsEnabled = IsLoggedIn;
+            buttonRegister.IsEnabled = _isOtpVerified;
+            buttonSendOtp.IsEnabled = !string.IsNullOrEmpty(textBoxUsername.Text); // Bật nút Send OTP nếu email có giá trị
+            buttonVerifyOtp.IsEnabled = _isOtpSent;
+        }
+
+        private void ShowError(string message) => MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+        private async Task<bool> RegisterAccountAsync(string email, string password)
+        {
+            try
+            {
+                using var httpClient = new HttpClient();
+                var payload = new { email, password, returnSecureToken = true };
+                var jsonContent = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
+                var response = await httpClient.PostAsync("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=API_KEY", jsonContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Registration successful!");
+                    return true;
+                }
+
+                var errorResponse = await response.Content.ReadAsStringAsync();
+                ShowError($"Registration failed: {errorResponse}");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                ShowError($"Error during registration: {ex.Message}");
+                return false;
+            }
+        }
+        private bool IsValidEmail(string email)
+        {
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(email, emailPattern);
+        }
+
+        private async Task SendOtpEmailAsync()
+        {
+            _generatedOtp = new Random().Next(100000, 999999).ToString();
+            string userEmail = textBoxUsername.Text;
+            string sendGridApiKey = "GRID_API_KEY";  // Đảm bảo API key là hợp lệ
+            if (!IsValidEmail(userEmail))
+            {
+                ShowError("Invalid email. Please enter a valid email address.");
+                return;
+            }
+
+            try
+            {
+                var client = new SendGridClient(sendGridApiKey);
+                var from = new EmailAddress("no-reply@example.com", "C4F Password Manager"); //no-reply@example.com is gmail account has been verified by sendgrid
+                var to = new EmailAddress(userEmail);
+                var subject = "OTP Verification";
+                var plainTextContent = $"Your OTP is: {_generatedOtp}";
+                var htmlContent = $"<strong>Your OTP is: {_generatedOtp}</strong>";
+                var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+                var response = await client.SendEmailAsync(msg);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK ||
+                    response.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    MessageBox.Show("OTP has been sent via email.");
+                    _isOtpSent = true;
+                    UpdateControls();
+                }
+                else
+                {
+                    ShowError("Unable to send OTP. Please check your SendGrid API key and configuration.");
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowError($"Unable to send OTP via SendGrid: {ex.Message}");
+            }
+        }
+
+        private void ButtonSendOtp_Click(object sender, RoutedEventArgs e)
+        {
+            SendOtpEmailAsync();
+        }
+
+        private bool VerifyOtp(string userOtp) => _generatedOtp == userOtp;
+
+        private async void ButtonRegister_Click(object sender, RoutedEventArgs e)
+        {
+            if (_isOtpVerified)
+            {
+                var email = textBoxUsername.Text;
+                var password = passwordBoxUser.Password;
+
+                if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show("Please enter full email and password.");
+                    return;
+                }
+
+                await RegisterAccountAsync(email, password);
+            }
+            else
+            {
+                MessageBox.Show("Please verify OTP before registering.");
+            }
         }
 
         private async void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
-            var old = Cursor;
-            try
+            if (_isOtpVerified)
             {
-                Cursor = Cursors.Wait;
-                waiting = true;
+                var email = textBoxUsername.Text;
+                var password = passwordBoxUser.Password;
+
+                if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show("Please enter email and password.");
+                    return;
+                }
+
+                _isWaiting = true;
                 UpdateControls();
 
-                // Firebase login implementation
-                var isAuthenticated = await FirebaseAuthenticate(textBoxUsername.Text, passwordBoxUser.Password);
-                if (isAuthenticated)
+                try
                 {
-                    IsLoggedIn = true; // Đặt trạng thái đăng nhập thành công
-                    MessageBox.Show(Properties.Resources.CLOUD_LOGIN_SUCCEEDED, Title, MessageBoxButton.OK, MessageBoxImage.Information);
-                    Properties.Settings.Default.CloudUsername = textBoxUsername.Text;
-                    DialogResult = true;
-                    Close();
-
-                    UpdateControls(); // Gọi lại hàm để cập nhật trạng thái của các nút
+                    if (await FirebaseAuthenticateAsync(email, password))
+                    {
+                        IsLoggedIn = true;
+                        MessageBox.Show("Login successful!");
+                        UpdateControls();
+                    }
+                    else
+                    {
+                        ShowError("Login failed. Please check your login information.");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Login failed. Please check your credentials.", Title, MessageBoxButton.OK, MessageBoxImage.Error);
+                    ShowError($"Error while logging in: {ex.Message}");
                 }
-
-                waiting = false;
-                Cursor = old;
+                finally
+                {
+                    _isWaiting = false;
+                    UpdateControls();
+                }
             }
-            catch (Exception ex)
+            else
             {
-                CloudToken = null;
-                waiting = false;
-                Cursor = old;
-                MessageBox.Show(string.Format(Properties.Resources.ERROR_OCCURRED_0, ex.Message), Title, MessageBoxButton.OK, MessageBoxImage.Error);
-                UpdateControls();
+                MessageBox.Show("Please verify OTP before logging in.");
             }
         }
 
+        private async void ButtonVerifyOtp_Click(object sender, RoutedEventArgs e)
+        {
+            if (!_isOtpSent)
+            {
+                MessageBox.Show("OTP not sent yet. Please click 'Send OTP' first.");
+                return;
+            }
 
-        private async Task<bool> FirebaseAuthenticate(string email, string password)
+            if (VerifyOtp(otpTextBox.Text))
+            {
+                _isOtpVerified = true;
+                MessageBox.Show("OTP authentication successful!");
+                UpdateControls();
+            }
+            else
+            {
+                MessageBox.Show("OTP is incorrect. Please try again.");
+            }
+        }
+
+        private async Task<bool> FirebaseAuthenticateAsync(string email, string password)
         {
             try
             {
-                using (var httpClient = new HttpClient())
-                {
-                    var payload = new
-                    {
-                        email = email,
-                        password = password,
-                        returnSecureToken = true
-                    };
+                using var httpClient = new HttpClient();
+                var payload = new { email, password, returnSecureToken = true };
+                var jsonContent = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
+                var response = await httpClient.PostAsync("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=API_KEY", jsonContent);
 
-                    var jsonContent = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
-                    var response = await httpClient.PostAsync($"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=YOUR_API_KEY", jsonContent);
-
-                    return response.IsSuccessStatusCode;
-                }
+                return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during Firebase authentication: {ex.Message}");
+                ShowError($"Error during Firebase authentication: {ex.Message}");
                 return false;
             }
         }
 
-
-        private void OnChanged(object sender, RoutedEventArgs e)
-        {
-            UpdateControls();
-        }
-
-        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
-        {
-            if (!waiting)
-            {
-                Close();
-            }
-        }
-
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            if (waiting)
-            {
-                e.Cancel = true;
-            }
-        }
-
-        // Chức năng Browse file để chọn file từ máy tính
-        private void ButtonBrowse_Click(object sender, RoutedEventArgs e)
-        {
-            var openFileDialog = new OpenFileDialog
-            {
-                Filter = "All files (*.*)|*.*", // Lọc các loại file
-                Title = "Select a File to Upload"
-            };
-            if (openFileDialog.ShowDialog() == true)
-            {
-                textBoxFilePath.Text = openFileDialog.FileName; // Đặt đường dẫn file đã chọn
-            }
-        }
-
-        // Chức năng Upload file lên Google Cloud Storage
         private async void ButtonUpload_Click(object sender, RoutedEventArgs e)
         {
-            if (!IsLoggedIn) // Kiểm tra nếu chưa đăng nhập
+            if (!IsLoggedIn)
             {
                 MessageBox.Show("You must be logged in to upload files.", Title, MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -218,33 +267,19 @@ namespace PasswordManager
                 return;
             }
 
-            // Gọi hàm tải file lên
-            await UploadFileToBucket(filePath);
-        }
-
-        // Hàm để upload file lên bucket trên Google Cloud Storage
-        private async Task UploadFileToBucket(string filePath)
-        {
             try
             {
-                var fileName = Path.GetFileName(filePath); // Lấy tên file
-                using (var fileStream = File.OpenRead(filePath))
-                {
-                    // Tải file lên bucket
-                    await storageClient.UploadObjectAsync(bucketName, fileName, null, fileStream);
-                    MessageBox.Show($"File '{fileName}' uploaded to bucket '{bucketName}' successfully.");
-                }
+                await UploadFileToBucketAsync(filePath);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error uploading file: {ex.Message}");
+                ShowError($"Error uploading file: {ex.Message}");
             }
         }
 
-        // Sự kiện khi nhấn nút Download
         private async void ButtonDownload_Click(object sender, RoutedEventArgs e)
         {
-            if (!IsLoggedIn) // Kiểm tra nếu chưa đăng nhập
+            if (!IsLoggedIn)
             {
                 MessageBox.Show("You must be logged in to download files.", Title, MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -257,36 +292,72 @@ namespace PasswordManager
                 return;
             }
 
-            // Gọi hàm tải file từ bucket
-            await DownloadFileFromBucket(fileNameInBucket);
-        }
-
-        // Hàm để tải tệp từ bucket trên Google Cloud Storage
-        private async Task DownloadFileFromBucket(string fileNameInBucket)
-        {
             try
             {
-                // Đặt vị trí lưu file sau khi tải xuống
-                var saveFileDialog = new SaveFileDialog
-                {
-                    FileName = fileNameInBucket, // Đặt tên file mặc định
-                    Filter = "All files (*.*)|*.*",
-                    Title = "Select a location to save the file"
-                };
-                if (saveFileDialog.ShowDialog() == true)
-                {
-                    // Tạo stream cho tệp tải xuống
-                    using (var outputFile = File.Create(saveFileDialog.FileName))
-                    {
-                        // Tải tệp từ bucket
-                        await storageClient.DownloadObjectAsync(bucketName, fileNameInBucket, outputFile);
-                        MessageBox.Show($"File '{fileNameInBucket}' downloaded successfully to '{saveFileDialog.FileName}'.");
-                    }
-                }
+                await DownloadFileFromBucketAsync(fileNameInBucket);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error downloading file: {ex.Message}");
+                ShowError($"Error downloading file: {ex.Message}");
+            }
+        }
+
+        private async Task UploadFileToBucketAsync(string filePath)
+        {
+            var fileName = Path.GetFileName(filePath);
+            using var fileStream = File.OpenRead(filePath);
+            await _storageClient.UploadObjectAsync(BucketName, fileName, null, fileStream);
+            MessageBox.Show($"File '{fileName}' uploaded to bucket '{BucketName}' successfully.");
+        }
+
+
+        private async Task DownloadFileFromBucketAsync(string fileNameInBucket)
+        {
+            var saveFileDialog = new SaveFileDialog
+            {
+                FileName = fileNameInBucket,
+                Filter = "All files (*.*)|*.*",
+                Title = "Select a location to save the file"
+            };
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                using var outputFile = File.Create(saveFileDialog.FileName);
+                await _storageClient.DownloadObjectAsync(BucketName, fileNameInBucket, outputFile);
+                MessageBox.Show($"File '{fileNameInBucket}' downloaded successfully to '{saveFileDialog.FileName}'.");
+            }
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (!_isWaiting)
+            {
+                Close();
+            }
+        }
+
+        private void ButtonBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "All files (*.*)|*.*",
+                Title = "Select a File to Upload"
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                textBoxFilePath.Text = openFileDialog.FileName;
+            }
+        }
+
+        private void OnChanged(object sender, RoutedEventArgs e)
+        {
+            UpdateControls();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (_isWaiting)
+            {
+                e.Cancel = true;
             }
         }
     }

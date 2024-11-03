@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Closing="Window_Closing"
         Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
-        Height="250" Width="600" Icon="Images/logo.png" ResizeMode="NoResize">
+        Height="270" Width="600" Icon="Images/logo.png" ResizeMode="NoResize">
     <Grid Margin="10,10,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -33,23 +33,27 @@
 
         <!-- Password label and input -->
         <Label Grid.Row="1" Grid.Column="0" Content="{x:Static props:Resources.LABEL_PASSWORD}" Target="{Binding ElementName=passwordBoxUser}" VerticalAlignment="Center" />
-        <PasswordBox x:Name="passwordBoxUser" MaxLength="100" Height="23" PasswordChanged="OnChanged" Grid.ColumnSpan="3" Margin="121,2,5,1" Grid.Row="1" />
+        <PasswordBox x:Name="passwordBoxUser" MaxLength="100" Height="23" PasswordChanged="OnChanged" Grid.ColumnSpan="3" Margin="121,4,5,97" Grid.Row="1" Grid.RowSpan="3" />
 
         <!-- File path label, input, and Browse/Upload buttons -->
-        <Label Grid.Row="3" Grid.Column="0" Content="File Path:" VerticalAlignment="Top" Margin="0,42,0,0" />
-        <TextBox Grid.Row="3" x:Name="textBoxFilePath" Height="23" MaxLength="255" Grid.ColumnSpan="3" Margin="121,40,125,35" />
-        <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" Margin="0,24,0,33" Grid.RowSpan="2"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="File Path:" VerticalAlignment="Top" Margin="0,64,0,0" />
+        <TextBox Grid.Row="3" x:Name="textBoxFilePath" Height="23" MaxLength="255" Grid.ColumnSpan="3" Margin="121,68,126,7" />
 
         <!-- File name in bucket label and input, Download button -->
-        <Label Grid.Row="3" Grid.Column="0" Content="File Name on Bucket:" VerticalAlignment="Top" Margin="0,69,0,0" />
-        <TextBox Grid.Row="3" x:Name="textBoxFileNameInBucket" Height="23" MaxLength="255" Grid.ColumnSpan="3" Margin="121,74,90,0" />
-        <Button Grid.Row="3" Grid.Column="2" x:Name="buttonDownload" Content="Download" Height="23" Width="80" Click="ButtonDownload_Click" Margin="85,74,5,1" />
+        <Label Grid.Row="3" Grid.Column="0" Content="File Name on Bucket:" VerticalAlignment="Top" Margin="0,97,0,0" Grid.RowSpan="2" />
+        <TextBox Grid.Row="4" x:Name="textBoxFileNameInBucket" Height="23" MaxLength="255" Grid.ColumnSpan="3" Margin="121,3,90,31" />
+        <Button Grid.Row="4" Grid.Column="2" x:Name="buttonDownload" Content="Download" Height="23" Width="80" Click="ButtonDownload_Click" Margin="85,4,5,32" />
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="125,7,0,67" Grid.ColumnSpan="2"/>
-        <Button x:Name="buttonCancel" IsCancel="True" Content="{x:Static props:Resources.BUTTON_CANCEL}" Click="ButtonCancel_Click" Margin="85,19,5,-40" Grid.Column="2" Grid.Row="4" RenderTransformOrigin="0.54,-0.731" />
-        <Button x:Name="buttonLogin" IsDefault="True" Content="{x:Static props:Resources.BUTTON_LOGIN}" Click="ButtonLogin_Click" Margin="121,7,209,67" Grid.Row="3" Grid.ColumnSpan="2" />
-        <Button x:Name="buttonUpload" Content="Upload" Click="ButtonUpload_Click" Margin="85,40,5,35" Grid.Column="2" Grid.Row="3" />
-        <Button x:Name="buttonBrowse" Content="..." Click="ButtonBrowse_Click" Margin="50,40,89,35" Grid.Column="2" Grid.Row="3" />
+        <Button x:Name="buttonCancel" IsCancel="True" Content="{x:Static props:Resources.BUTTON_CANCEL}" Click="ButtonCancel_Click" Margin="85,39,5,-2" Grid.Column="2" Grid.Row="4" RenderTransformOrigin="0.54,-0.731" />
+        <Button x:Name="buttonLogin" IsDefault="True" Content="{x:Static props:Resources.BUTTON_LOGIN}" Click="ButtonLogin_Click" Margin="121,38,210,36" Grid.Row="3" RenderTransformOrigin="0.328,0.443" Grid.ColumnSpan="2" />
+        <Button x:Name="buttonUpload" Content="Upload" Click="ButtonUpload_Click" Margin="85,68,5,7" Grid.Column="2" Grid.Row="3" />
+        <Button x:Name="buttonBrowse" Content="..." Click="ButtonBrowse_Click" Margin="49,68,90,7" Grid.Column="2" Grid.Row="3" />
+        <!-- OTP -->
+        <Label Grid.Row="3" Grid.Column="0" Content="OTP:" VerticalAlignment="Top" Margin="0,5,0,0" />
+        <TextBox x:Name="otpTextBox" Height="23" MaxLength="6" Grid.Row="3" Margin="121,8,4,67" Grid.ColumnSpan="2" />
+        <Button x:Name="buttonSendOtp" Content="Send OTP" Click="ButtonSendOtp_Click" Grid.Row="3" Grid.Column="2" Margin="1,8,90,67" />
+        <Button x:Name="buttonVerifyOtp" Content="Verify OTP" Click="ButtonVerifyOtp_Click" Grid.Row="3" Grid.Column="2" Margin="85,8,5,67" />
+        <Button x:Name="buttonRegister" Content="Register" Click="ButtonRegister_Click" Grid.Row="3" Grid.Column="1" Margin="91,38,113,36" />
 
-        <!-- Login and Cancel buttons -->
     </Grid>
 </Window>
