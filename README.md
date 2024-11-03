@@ -1,1 +1,1 @@
-Install the necessary package
+Install necessary packages
