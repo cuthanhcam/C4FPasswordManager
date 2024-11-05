@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyCopyrightAttribute("2024 Cam Cu Thanh")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.1")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1+451b5cd3f1b73084d5993378d38b3b4aebd59784")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1+99b5deb89d8fe1ccc1301161f48649f6563a4142")]
 [assembly: System.Reflection.AssemblyProductAttribute("C4F Password Manager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("C4FPasswordManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.1")]

@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{2AA3E8DA-DEB3-4B71-9F45-1D4E8DDE6A27}|PasswordManager\\PasswordManager.csproj|d:\\sourcecode\\c4fpasswordmanager\\passwordmanager\\cloudloginwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2AA3E8DA-DEB3-4B71-9F45-1D4E8DDE6A27}|PasswordManager\\PasswordManager.csproj|solutionrelative:passwordmanager\\cloudloginwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2AA3E8DA-DEB3-4B71-9F45-1D4E8DDE6A27}|PasswordManager\\PasswordManager.csproj|d:\\sourcecode\\c4fpasswordmanager\\passwordmanager\\cloudloginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{2AA3E8DA-DEB3-4B71-9F45-1D4E8DDE6A27}|PasswordManager\\PasswordManager.csproj|solutionrelative:passwordmanager\\cloudloginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,20 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CloudLoginWindow.xaml",
-              "DocumentMoniker": "D:\\SourceCode\\C4FPasswordManager\\PasswordManager\\CloudLoginWindow.xaml",
-              "RelativeDocumentMoniker": "PasswordManager\\CloudLoginWindow.xaml",
-              "ToolTip": "D:\\SourceCode\\C4FPasswordManager\\PasswordManager\\CloudLoginWindow.xaml",
-              "RelativeToolTip": "PasswordManager\\CloudLoginWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-03T18:56:42.9Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -40,7 +24,7 @@
               "RelativeDocumentMoniker": "PasswordManager\\CloudLoginWindow.xaml.cs",
               "ToolTip": "D:\\SourceCode\\C4FPasswordManager\\PasswordManager\\CloudLoginWindow.xaml.cs",
               "RelativeToolTip": "PasswordManager\\CloudLoginWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAwAgAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-27T04:56:33.066Z",
               "EditorCaption": ""
