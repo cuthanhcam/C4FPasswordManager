@@ -1,0 +1,94 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Directories for compiled binaries
+/bin/
+/obj/
+/vs/
+/build/
+
+# NuGet Packages
+/packages/
+*.nupkg
+*.snupkg
+
+# Project-specific configuration files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.sln.ide
+*.vsconfig
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Visual Studio Code settings
+.vscode/
+
+# Visual Studio temporary files
+.vs/
+.ipch/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cache
+*.ilk
+*.idb
+*.pdb
+*.tlog
+*.lastbuildstate
+
+# Backup files
+*.bak
+*.old
+*.orig
+
+# OS-specific files
+Thumbs.db
+.DS_Store
+ehthumbs.db
+Icon?
+
+# IDE-specific directories
+.idea/
+*.iml
+
+# Other temporary directories and files
+*.swp
+*.lock
+*.directory
+*.~lock.*
